@@ -22,25 +22,8 @@ Slytherix is a fast-paced trivia game built with **Flutter**. Unlike the classic
 ## In-Game Action
 | Easy Mode | Hard Mode |
 | :---: | :---: |
-| ![Gameplay](screenshots/screenshot_01.png) | ![Gameplay](screenshots/screenshot_02.png) |
+| ![Gameplay](screenshots/screenshot_01.PNG) | ![Gameplay](screenshots/screenshot_02.PNG) |
 
 ---
 
-##  Quick Start
-Make sure you have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed.
 
-1. **Clone & Enter:**
-   ```bash
-   git clone [https://github.com/your-username/slytherix-quiz.git](https://github.com/your-username/slytherix-quiz.git)
-   cd slytherix-quiz
-
-2. **Get Packages:**
-    ``` bash 
-    flutter pub get
-
-3.  **Run:** 
- # For Web
-flutter run -d chrome
-
-# For Mobile
-flutter run
