@@ -158,9 +158,13 @@ class _SnakePageState extends State<SnakePage> {
     availableSpots.removeWhere((i) => snake.contains(i));
     availableSpots.shuffle();
 
-    activeAnswers[availableSpots[0]] = currentQuestion.correct;
-    for (int i = 0; i < currentQuestion.wrongs.length; i++) {
-      activeAnswers[availableSpots[i + 1]] = currentQuestion.wrongs[i];
+    // Shuffle options so "A" isn't always correct
+    List<String> options = [currentQuestion.correct, ...currentQuestion.wrongs];
+    options.shuffle();
+
+    // Map A, B, C strings to random positions
+    for (int i = 0; i < options.length; i++) {
+      activeAnswers[availableSpots[i]] = options[i];
     }
     
     if (isPlaying) startHeadStart();
@@ -310,7 +314,9 @@ class _SnakePageState extends State<SnakePage> {
               spacing: 8,
               runSpacing: 4,
               alignment: WrapAlignment.center,
-              children: activeAnswers.values.map((answer) {
+              children: List.generate(activeAnswers.length, (index) {
+                String label = String.fromCharCode(65 + index); // A, B, C
+                String answerText = activeAnswers.values.elementAt(index);
                 return Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
@@ -322,15 +328,15 @@ class _SnakePageState extends State<SnakePage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "[${answer[0].toUpperCase()}]", 
+                        "$label:", 
                         style: const TextStyle(color: Colors.cyanAccent, fontWeight: FontWeight.bold, fontSize: 12),
                       ),
                       const SizedBox(width: 4),
-                      Text(answer, style: const TextStyle(fontSize: 12)),
+                      Text(answerText, style: const TextStyle(fontSize: 12)),
                     ],
                   ),
                 );
-              }).toList(),
+              }),
             ),
         ],
       ),
@@ -380,6 +386,13 @@ class _SnakePageState extends State<SnakePage> {
                     bool isHead = snake.isNotEmpty && snake.first == index;
                     bool isBody = snake.contains(index);
                     bool isAnswer = activeAnswers.containsKey(index);
+                    
+                    String choiceLabel = "";
+                    if (isAnswer) {
+                      // Get index position in the map to assign A, B, or C
+                      int pos = activeAnswers.keys.toList().indexOf(index);
+                      choiceLabel = String.fromCharCode(65 + pos);
+                    }
 
                     return Container(
                       margin: const EdgeInsets.all(0.5),
@@ -396,9 +409,9 @@ class _SnakePageState extends State<SnakePage> {
                       child: isAnswer 
                         ? Center(
                             child: Text(
-                              activeAnswers[index]![0].toUpperCase(), 
+                              choiceLabel, 
                               style: const TextStyle(
-                                fontSize: 11, 
+                                fontSize: 13, 
                                 fontWeight: FontWeight.bold, 
                                 color: Colors.white,
                                 shadows: [Shadow(blurRadius: 2, color: Colors.black)],
