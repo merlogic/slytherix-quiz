@@ -19,10 +19,10 @@ Slytherix is a fast-paced trivia game built with **Flutter**. Unlike the classic
 * **Adaptive Input:** Full support for **Keyboard (WASD/Arrows)** and a custom **On-screen D-Pad** for mobile users.
 * **Haptics:** Integrated `HapticFeedback` for a tactile feel on every correct answer.
 
-## In-Game Action
+### 🎮 In-Game Action
 | Easy Mode | Hard Mode |
 | :---: | :---: |
-| ![Gameplay](screenshots/screenshot_01.PNG) | ![Gameplay](screenshots/screenshot_02.PNG) |
+| ![Easy Mode Gameplay](screenshots/screenshot_01.PNG) | ![Hard Mode Gameplay](screenshots/screenshot_02.PNG) |
 
 ---
 
